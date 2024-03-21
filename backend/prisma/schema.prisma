@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Products {
-  id         String   @id @default(cuid())
+  id         Int      @id @default(autoincrement())
   name       String   @unique
   price      Decimal  @db.Decimal(10, 2)
   created_at DateTime @default(now())
