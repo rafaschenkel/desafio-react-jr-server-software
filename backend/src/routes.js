@@ -51,9 +51,10 @@ productsRoutes.put("/", async (req, res) => {
 });
 
 // Delete
-productsRoutes.delete("/", async (req, res) => {
+productsRoutes.delete("/:id", async (req, res) => {
   try {
-    const { codigo } = req.body;
+    const { id } = req.params;
+    const codigo = Number(id);
     if (!codigo) return res.status(400).json("Codigo é obrigatório!");
 
     const product = await db.products.findUnique({ where: { codigo } });
