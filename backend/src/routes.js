@@ -6,11 +6,11 @@ const productsRoutes = express.Router();
 // Create
 productsRoutes.post("/", async (req, res) => {
   try {
-    const { descricao, preco } = req.body;
+    const { descricao, preco, data_cadastro } = req.body;
     const product = await db.products.findUnique({ where: { descricao } });
     if (product) return res.status(400).json("Item já cadastrado!");
 
-    await db.products.create({ data: { descricao, preco } });
+    await db.products.create({ data: { descricao, preco, data_cadastro } });
     return res.status(201).json("Cadastro realizado com sucesso!");
   } catch (error) {
     res.status(500).json("Algo deu errado! Tente novamente!");
