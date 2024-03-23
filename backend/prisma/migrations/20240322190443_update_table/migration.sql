@@ -3,7 +3,7 @@ CREATE TABLE "Products" (
     "codigo" SERIAL NOT NULL,
     "descricao" TEXT NOT NULL,
     "preco" DECIMAL(10,2) NOT NULL,
-    "data_cadastro" TIMESTAMPTZ(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "data_cadastro" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Products_pkey" PRIMARY KEY ("codigo")
 );

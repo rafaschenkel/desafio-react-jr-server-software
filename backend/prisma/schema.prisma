@@ -14,8 +14,8 @@ datasource db {
 }
 
 model Products {
-  codigo        Int     @id @default(autoincrement())
-  descricao     String  @unique
-  preco         Decimal @db.Decimal(10, 2)
-  data_cadastro String
+  codigo        Int      @id @default(autoincrement())
+  descricao     String   @unique
+  preco         Decimal  @db.Decimal(10, 2)
+  data_cadastro DateTime @default(now())
 }
