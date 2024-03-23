@@ -6,22 +6,36 @@ const productsRoutes = express.Router();
 // Create
 productsRoutes.post("/", async (req, res) => {
   try {
-    const { descricao, preco, data_cadastro } = req.body;
+    const { descricao, preco } = req.body;
     const product = await db.products.findUnique({ where: { descricao } });
     if (product) return res.status(400).json("Item já cadastrado!");
 
-    await db.products.create({ data: { descricao, preco, data_cadastro } });
+    await db.products.create({ data: { descricao, preco } });
     return res.status(201).json("Cadastro realizado com sucesso!");
   } catch (error) {
     res.status(500).json("Algo deu errado! Tente novamente!");
   }
 });
 
-// Read
+// Read all
 productsRoutes.get("/", async (req, res) => {
   try {
     const products = await db.products.findMany();
     return res.json(products);
+  } catch (error) {
+    res.status(500).json("Algo deu errado! Tente novamente!");
+  }
+});
+
+// Read one
+productsRoutes.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const codigo = Number(id);
+    if (!codigo) return res.status(400).json("Codigo inválido!");
+
+    const product = await db.products.findUnique({ where: { codigo } });
+    return res.json(product);
   } catch (error) {
     res.status(500).json("Algo deu errado! Tente novamente!");
   }
